@@ -13,12 +13,15 @@
 
 #include "toys.hh"
 
-Toy::Toy(std::string title) : title_(title) {}
+Object::Object() {}
+Object::~Object() {}
+
+Toy::Toy(std::string title) : Object(), title_(title) {}
 Toy::~Toy() {}
 
 void	Toy::isTaken() {}
 
-Teddy::Teddy(std::string title) : Toy(title) {}
+Teddy::Teddy(std::string title) : Toy(title) { std::cout<<"Boom"<<std::endl }
 Teddy::~Teddy() {}
 
 void	Teddy::isTaken() {
@@ -32,20 +35,23 @@ void	LittlePony::isTaken() {
 	std::cout << "yo man" << std::endl ;
 }
 
+std::string		Toy::getName() {
+	return this->name_;
+}
+
 Object		**MyUnitTests() {
-	Object*	toys[] = {
-		new 
-	}
-	LittlePony		paf("rar");
+	Object**	toys;
+
+	toys = new Object*[2];
+	toys[0] = new Teddy("pof");
+	toys[1] = new LittlePony("paf");
+	return (toys);
 }
 
 int		main() {
-	Object*	toys[] = MyUnitTests();
+	Object**	toys = MyUnitTests();
 
-
-	LittlePony		paf("rar");
-
-	paf.isTaken();
+	toys[0].getName();
 
 	return 0;
 }
